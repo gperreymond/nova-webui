@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start:client": "./node_modules/.bin/webpack -d --watch",
-    "start:server": "DEBUG=nova-feathers:* ./node_modules/.bin/nodemon --config nodemon.json server"
+    "start:server": "DEBUG=nova-feathers:* ./node_modules/.bin/nodemon --config nodemon.json server",
+    "test:standard": "./node_modules/.bin/standard --verbose | snazzy"
   },
   "dependencies": {
     "@feathersjs/configuration": "1.0.2",
@@ -62,7 +63,8 @@
       "it"
     ],
     "ignore": [
-      "coverage/**"
+      "coverage/**",
+      "public/**"
     ]
   }
 }
