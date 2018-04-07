@@ -1,8 +1,6 @@
 import Debug from 'debug'
 import readApplication from './methods/applications/read'
 import updateApplication from './methods/applications/update'
-import listPatterns from './methods/patterns/list'
-import createPattern from './methods/patterns/create'
 
 export default {
   name: 'ui-application',
@@ -10,8 +8,7 @@ export default {
     return {
       service: {},
       store: {
-        application: false,
-        patterns: false
+        application: false
       }
     }
   },
@@ -21,11 +18,9 @@ export default {
   mounted: function () {
     this.debug('mounted')
     // services
-    this.service.applications = this.$root.$feathers.service('api/v2/applications')
-    this.service.patterns = this.$root.$feathers.service('api/v2/patterns')
+    this.service.applications = this.$root.$feathers.service('api/v1/applications')
     // initializers
     this.readApplication(this.$route.params.uuid)
-    this.listPatterns(this.$route.params.uuid)
   },
   updated: function (event) {
     // this.debug('updated')
@@ -36,8 +31,6 @@ export default {
   methods: {
     debug: Debug('snapbook:ui-application'),
     readApplication,
-    updateApplication,
-    listPatterns,
-    createPattern
+    updateApplication
   }
 }

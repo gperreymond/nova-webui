@@ -19,6 +19,7 @@
           <button type="button" v-on:click="(e) => deleteApplication(e, index)" class="danger square"><i class="fas fa-times"></i></button>
         </li>
       </ul>
+      <h2 v-if="store.applications.total === 0">Aucune application disponible</h2>
     </section>
   </div>
 </template>

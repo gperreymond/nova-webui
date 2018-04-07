@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start:client": "./node_modules/.bin/webpack -d --watch",
+    "start:client": "$(npm bin)/webpack -d --watch",
     "start:server": "DEBUG=nova-feathers:* ./node_modules/.bin/nodemon --config nodemon.json server",
-    "test:standard": "./node_modules/.bin/standard --verbose | snazzy"
+    "test:standard": "$(npm bin)/standard --verbose | snazzy",
+    "test:unit": "$(npm bin)/nyc --clean --reporter lcov --reporter json-summary --report-dir ./coverage/unit $(npm bin)/mocha --opts .mocharc"
   },
   "dependencies": {
     "@feathersjs/configuration": "1.0.2",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@feathersjs/client": "3.4.4",
+    "assert": "1.4.1",
     "babel-core": "6.26.0",
     "babel-helper-vue-jsx-merge-props": "2.0.3",
     "babel-loader": "7.1.4",

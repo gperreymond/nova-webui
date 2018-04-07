@@ -20,7 +20,7 @@ export default {
   mounted: function () {
     this.debug('mounted')
     // services
-    this.service.applications = this.$root.$feathers.service('api/v2/applications')
+    this.service.applications = this.$root.$feathers.service('api/v1/applications')
     // initializers
     this.listApplications()
   },

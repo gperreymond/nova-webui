@@ -20,16 +20,6 @@
         <li><input type="text" v-model.trim="store.application.name" v-on:keyup="(e) => updateApplication(e)" placeholder="Modifiez-moi" /></li>
       </ul>
     </section>
-    <section v-if="store.patterns !== false">
-      <div class="title">
-        <h2>Patterns</h2>
-      </div>
-      <ul class="content box" v-if="store.patterns.total > 0">
-        <li v-for="(item, index) in store.patterns.data">
-
-        </li>
-      </ul>
-    </section>
   </div>
 </template>
 
