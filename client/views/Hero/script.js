@@ -1,14 +1,14 @@
 import Debug from 'debug'
-import readApplication from './methods/applications/read'
-import updateApplication from './methods/applications/update'
+import readApplication from './methods/heroes/read'
+import updateApplication from './methods/heroes/update'
 
 export default {
-  name: 'ui-application',
+  name: 'ui-hero',
   data: function () {
     return {
       service: {},
       store: {
-        application: false
+        hero: false
       }
     }
   },
@@ -18,7 +18,7 @@ export default {
   mounted: function () {
     this.debug('mounted')
     // services
-    this.service.applications = this.$root.$feathers.service('api/v1/applications')
+    this.service.heroes = this.$root.$feathers.service('api/v1/heroes')
     // initializers
     this.readApplication(this.$route.params.uuid)
   },
@@ -29,7 +29,7 @@ export default {
     this.debug('destroyed')
   },
   methods: {
-    debug: Debug('snapbook:ui-application'),
+    debug: Debug('snapbook:ui-hero'),
     readApplication,
     updateApplication
   }

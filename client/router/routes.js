@@ -1,12 +1,12 @@
-import Applications from '@/views/Applications'
-import Application from '@/views/Application'
+import Heroes from '@/views/Heroes'
+import Hero from '@/views/Hero'
 
 export default [{
-  path: '/applications',
-  name: 'applications',
-  component: Applications
+  path: '/heroes',
+  name: 'heroes',
+  component: Heroes
 }, {
-  path: '/applications/:uuid',
-  name: 'application',
-  component: Application
+  path: '/heroes/:uuid',
+  name: 'hero',
+  component: Hero
 }]

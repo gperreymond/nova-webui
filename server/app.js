@@ -3,10 +3,9 @@ const feathers = require('@feathersjs/feathers')
 const express = require('@feathersjs/express')
 const configuration = require('@feathersjs/configuration')
 const socketio = require('@feathersjs/socketio')
+const rethinkdb = require('./plugins/feathers-rethinkdb')
 const logger = require('winston')
-
-const rethink = require('rethinkdbdash')
-const serviceRethink = require('feathers-rethinkdb')
+const glob = require('glob-promise')
 
 // Configure feathers
 const app = express(feathers())
@@ -19,21 +18,24 @@ app.use(express.urlencoded({extended: true}))
 app.configure(express.rest())
 // Enable the socketio provider for services.
 app.configure(socketio())
+// Enable rethinkdb
+app.configure(rethinkdb(app.get('rethinkdb')))
 
-const serviceConfig = { lean: true, paginate: { default: 5 } }
-
-// *** Services
-const r = rethink(app.get('rethinkdb'))
-
-app.use('/api/v1/applications', serviceRethink(Object.assign({ Model: r, name: 'applications' }, serviceConfig)))
-app.service('/api/v1/applications').hooks(require('./hooks/applications'))
+// Configure services
+app.$shema = {}
+glob.sync(path.resolve(__dirname, 'api/*/index.js')).map(filepath => {
+  const API = require(filepath)
+  app.$shema[API.path] = API.shema
+  app.use(API.path, API.service)
+  app.service(API.path).hooks(API.hooks)
+})
 
 // Configure SPA
 app.use(express.static(`${path.resolve(__dirname, '../public')}`))
-app.get('/applications', function (request, response) {
+app.get('/heroes', function (request, response) {
   response.sendFile(`${path.resolve(__dirname, '../public/index.html')}`)
 })
-app.get('/applications/:uuid', function (request, response) {
+app.get('/heroes/:uuid', function (request, response) {
   response.sendFile(`${path.resolve(__dirname, '../public/index.html')}`)
 })
 

@@ -4,19 +4,23 @@
   "license": "MIT",
   "scripts": {
     "start:client": "$(npm bin)/webpack -d --watch",
-    "start:server": "DEBUG=nova-feathers:* ./node_modules/.bin/nodemon --config nodemon.json server",
+    "start:server": "$(npm bin)/nodemon --config nodemon.json server",
     "test:standard": "$(npm bin)/standard --verbose | snazzy",
     "test:unit": "$(npm bin)/nyc --clean --reporter lcov --reporter json-summary --report-dir ./coverage/unit $(npm bin)/mocha --opts .mocharc"
   },
   "dependencies": {
     "@feathersjs/configuration": "1.0.2",
+    "@feathersjs/errors": "3.3.0",
     "@feathersjs/express": "1.2.1",
     "@feathersjs/feathers": "3.1.4",
     "@feathersjs/socketio": "3.2.1",
     "@feathersjs/socketio-client": "1.1.0",
-    "feathers-rethinkdb": "0.5.1",
+    "glob": "7.1.2",
+    "glob-promise": "3.4.0",
+    "joi": "13.1.2",
     "nconf": "0.10.0",
     "rethinkdbdash": "2.3.31",
+    "uuid": "3.2.1",
     "winston": "2.4.1"
   },
   "devDependencies": {
@@ -38,7 +42,7 @@
     "is_js": "0.9.0",
     "jsdom": "11.7.0",
     "jsdom-global": "3.0.2",
-    "mocha": "5.0.5",
+    "mocha": "5.1.0",
     "mocha-standard": "1.0.0",
     "mocha-webpack": "1.1.0",
     "nodemon": "1.17.3",

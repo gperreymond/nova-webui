@@ -1,6 +1,11 @@
-.title {
+.appbar {
   display: flex;
   justify-content: space-between;
+}
+
+.title {
+  padding: 5px;
+  padding-top: 0;
 }
 
 .square {
